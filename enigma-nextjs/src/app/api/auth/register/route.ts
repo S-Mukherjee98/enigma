@@ -1,7 +1,7 @@
 import { connectDB } from "@/configs/dbConfig";
 import User from "@/models/userModel";
 import { NextRequest, NextResponse } from "next/server";
-import bcrypt from "bcryptjs"
+import bcrypt from "bcryptjs";
 import { message } from "antd";
 connectDB();
 
@@ -17,24 +17,24 @@ export async function POST(request: NextRequest) {
     //create new user
 
     //password encryption
-    const salt=await bcrypt.genSalt(10);
-    const hashedPassword = await bcrypt.hash(reqBody.password,salt);
-    reqBody.password=hashedPassword
-    const newUser=new User(reqBody);
-    await newUser.save()
+    const salt = await bcrypt.genSalt(10);
+    const hashedPassword = await bcrypt.hash(reqBody.password, salt);
+    reqBody.password = hashedPassword;
+    const newUser = new User(reqBody);
+    await newUser.save();
 
     return NextResponse.json({
-        success: true,
-        message:"User created successfully",
-        data:newUser
-    })
-
-  } catch (error:any) {
-    return NextResponse.json({
-      success:false,
-      message:error.message 
-    },
-    {status: 400}
+      success: true,
+      message: "User created successfully",
+      data: newUser,
+    });
+  } catch (error: any) {
+    return NextResponse.json(
+      {
+        success: false,
+        message: error.message,
+      },
+      { status: 400 }
     );
   }
 }
