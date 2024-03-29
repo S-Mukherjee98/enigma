@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 
 import "./globals.css";
 import ThemeProvider from "../providers/ThemeProvider";
+import LayoutProvider from "@/providers/LayoutProvider";
 
 export const metadata: Metadata = {
   title: "Enigma",
@@ -15,13 +16,17 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body> 
+      <head>
+        <link
+    href="https://cdn.jsdelivr.net/npm/remixicon@4.2.0/fonts/remixicon.css"
+    rel="stylesheet"
+/>
+      </head>
+      <body>
         <ThemeProvider>
-
-        {children}
+          <LayoutProvider>{children}</LayoutProvider>
         </ThemeProvider>
-        
-        </body>
+      </body>
     </html>
   );
 }
