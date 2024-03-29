@@ -1,37 +1,39 @@
-@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@100;500&family=Poppins:wght@500;600&display=swap');
-
+@import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@100;500&family=Poppins:wght@500;600&display=swap");
 
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
+html,
+body {
+  margin: 0;
+  padding: 0;
+}
+
 *,
 html,
-body
-{
-    box-sizing: border-box;
-    margin: 0;
-    padding: 0;
-    font-family: "Poppins", sans-serif !important;
+body {
+  box-sizing: border-box;
+  font-family: "Poppins", sans-serif !important;
 }
 
-button{
-    height: 45px !important;
-    border-radius: 0 !important;
-    border: 1px solid #000000 !important;
-    font-family: "Poppins", sans-serif;
+button {
+  height: 45px !important;
+  border-radius: 0 !important;
+  border: 1px solid #000000 !important;
+  font-family: "Poppins", sans-serif;
 }
 
-input{
-    width: 100% !important;
-    height: 40px !important;
-    padding: 0 10px !important;
+input {
+  width: 100% !important;
+  height: 40px !important;
+  padding: 0 10px !important;
 }
 
-.ant-form-item-label{
-padding-bottom: 0 !important;
+.ant-form-item-label {
+  padding-bottom: 0 !important;
 }
 
-.ant-form-item{
-    margin-bottom: 0 !important;
+.ant-form-item {
+  margin-bottom: 0 !important;
 }
