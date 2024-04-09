@@ -37,3 +37,9 @@ input {
 .ant-form-item {
   margin-bottom: 0 !important;
 }
+
+textarea{
+  width: 100% !important;
+  min-height: 100px !important;
+  padding: 10px !important;
+}

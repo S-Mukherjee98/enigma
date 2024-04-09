@@ -2,6 +2,7 @@
 import React from "react";
 import { Tabs } from "antd";
 import { useSelector } from "react-redux";
+import CategoriesList from "./components/CategoriesList";
 function Profile() {
   const { currentUser } = useSelector((state: any) => state.user);
   return (
@@ -12,7 +13,7 @@ function Profile() {
             Products
           </Tabs.TabPane>
           <Tabs.TabPane tab="Categories" key="2">
-            Categories
+            <CategoriesList />
           </Tabs.TabPane>
           <Tabs.TabPane tab="Orders" key="3">
             Orders
@@ -22,15 +23,16 @@ function Profile() {
           </Tabs.TabPane>
         </Tabs>
       )}
-      {!currentUser.isAdmin && <Tabs defaultActiveKey="1">
-        
-      <Tabs.TabPane tab="Orders" key="1">
+      {!currentUser.isAdmin && (
+        <Tabs defaultActiveKey="1">
+          <Tabs.TabPane tab="Orders" key="1">
             Orders
           </Tabs.TabPane>
           <Tabs.TabPane tab="Personal Information" key="2">
             Personal Information
           </Tabs.TabPane>
-        </Tabs>}
+        </Tabs>
+      )}
     </div>
   );
 }
