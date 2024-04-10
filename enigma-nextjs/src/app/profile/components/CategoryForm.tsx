@@ -15,8 +15,11 @@ const[form]=Form.useForm()
 const[loading,setLoading]=React.useState(false)
 const onFinish = async(values: any) => {
     try {
+      console.log(values);
+      
         setLoading(true)
         await axios.post("/api/categories",values);
+        message.success("Category added successfully")
         setShowCategoryForm(false);
         reloadData();
     } catch (error:any) {
