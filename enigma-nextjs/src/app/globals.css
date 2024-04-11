@@ -43,3 +43,7 @@ textarea{
   min-height: 100px !important;
   padding: 10px !important;
 }
+
+table{
+  border: 1px solid #a9a9a9 !important;
+}

@@ -3,12 +3,25 @@ import React from "react";
 import { Tabs } from "antd";
 import { useSelector } from "react-redux";
 import CategoriesList from "./components/CategoriesList";
+import { useRouter,useSearchParams } from "next/navigation";
+
 function Profile() {
   const { currentUser } = useSelector((state: any) => state.user);
+  const searchParams = useSearchParams();
+  const id=searchParams.get("id")||"1";
+  const[selectedtab,setSelectedTab]=React.useState(id)
+  const router = useRouter();
   return (
     <div>
       {currentUser.isAdmin && (
-        <Tabs defaultActiveKey="1">
+        <Tabs
+          defaultActiveKey="1"
+          onChange={(key) => {
+            router.push(`/profile?id=${key}`);
+            setSelectedTab(key)
+          }}
+          activeKey={selectedtab}
+        >
           <Tabs.TabPane tab="Products" key="1">
             Products
           </Tabs.TabPane>
