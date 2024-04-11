@@ -9,6 +9,8 @@ function CategoryForm({
   showCategoryForm,
   setShowCategoryForm,
   reloadData,
+  selectedCategory,
+  setSelectedCategory
 }: CategoryFormProps) {
 
 const[form]=Form.useForm()
@@ -32,9 +34,14 @@ const onFinish = async(values: any) => {
   return (
     <Modal
       open={showCategoryForm}
-      onCancel={() => setShowCategoryForm(false)}
+      onCancel={() =>{
+        setShowCategoryForm(false)
+        setSelectedCategory(null)
+      } }
       centered
-      title={<h1 className="text-2xl font-semibold text-gray-800">Add New Category</h1>}
+      title={<h1 className="text-2xl font-semibold text-gray-800">
+        {selectedCategory ? "Edit Category":"Add New Category"}
+        </h1>}
       closable={false}
       okText="Save"
       onOk={()=>{
@@ -45,7 +52,9 @@ const onFinish = async(values: any) => {
       }
     >
         <hr />
-      <Form layout="vertical" className="flex flex-col gap-5 mt-7" form={form} onFinish={onFinish}>
+      <Form layout="vertical" className="flex flex-col gap-5 mt-7" form={form} onFinish={onFinish}
+      initialValues={selectedCategory}
+      >
         <Form.Item label="Category Name" name="name"
         rules={getAntdFieldRequiredRules("Category Name is Required")}
         >
@@ -67,4 +76,6 @@ interface CategoryFormProps {
   showCategoryForm: boolean;
   setShowCategoryForm: (show: boolean) => void;
   reloadData: () => void;
+  selectedCategory:any;
+  setSelectedCategory: (category: any) => void;
 }

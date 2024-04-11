@@ -5,12 +5,14 @@ import { Button, message, Table } from "antd";
 import CategoryForm from "./CategoryForm";
 import axios from "axios";
 import moment from "moment";
+import { title } from "process";
 
 
 function CategoriesList() {
   const[loading,setLoading] =useState(false)
   const[categories,setCategories] = React.useState([])
   const [showCategoryForm, setShowCategoryForm] = React.useState(false);
+  const [selectedCategory, setSelectedCategory]  = React.useState<any>(null);
 
   const getCategories = async()=>{
 
@@ -48,6 +50,23 @@ function CategoriesList() {
       dataIndex:"createdAt",
       render:(createdAt:string)=>moment(createdAt).format("DD MMM YYYY"),
     },
+    {
+      title:"Action",
+      dataIndex:"action",
+      render:(action:any,params:any)=>{
+        return(
+          <div className="flex gap-3 items-center">
+            <Button type="default" className="btn-small">Delete</Button>
+            <Button type="primary" className="btn-small"
+            onClick={()=>{
+              setSelectedCategory(params)
+              setShowCategoryForm(true);
+            }}
+            >Edit</Button>
+          </div>
+        )
+      }
+    }
   ]
 
 
@@ -69,7 +88,9 @@ function CategoriesList() {
         <CategoryForm
           showCategoryForm={showCategoryForm}
           setShowCategoryForm={setShowCategoryForm}
+          selectedCategory={selectedCategory}
           reloadData={() => {}}
+          setSelectedCategory={setSelectedCategory}
         />
       )}
     
