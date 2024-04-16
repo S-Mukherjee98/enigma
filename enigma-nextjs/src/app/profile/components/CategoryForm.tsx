@@ -20,9 +20,19 @@ const onFinish = async(values: any) => {
       console.log(values);
       
         setLoading(true)
+        
+      if (selectedCategory) {
+        await axios.put(`/api/categories/${selectedCategory._id}`,values)
+        message.success("Category updated successfully")
+      } else {
+
         await axios.post("/api/categories",values);
         message.success("Category added successfully")
+        
+      }
+
         setShowCategoryForm(false);
+        setSelectedCategory(null)
         reloadData();
     } catch (error:any) {
         message.error(error.response.data.message || error.message);

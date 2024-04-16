@@ -33,7 +33,7 @@ export async function POST(request: NextRequest) {
 export async function GET(request: NextRequest) {
   try {
     await validateJWT(request)
-    const categories = await Category.find().populate("createdBy","name");
+    const categories = await Category.find().populate("createdBy","name").sort({createdAt:-1});
     return NextResponse.json({
       success: true,
       data: categories,

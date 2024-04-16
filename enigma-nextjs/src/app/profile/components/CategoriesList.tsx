@@ -10,6 +10,7 @@ import { title } from "process";
 
 function CategoriesList() {
   const[loading,setLoading] =useState(false)
+  const[loadingForDelete,setLoadingForDelete] = React.useState(false)
   const[categories,setCategories] = React.useState([])
   const [showCategoryForm, setShowCategoryForm] = React.useState(false);
   const [selectedCategory, setSelectedCategory]  = React.useState<any>(null);
@@ -31,6 +32,26 @@ function CategoriesList() {
 
   React.useEffect(()=>{getCategories();},[])
 
+
+  const onDelete = async (id : string)=>{
+
+    try {
+
+      setLoadingForDelete(true)
+      await axios.delete(`/api/categories/${id}`);
+      message.success("Category deleted successfully")
+      getCategories()
+      
+    } catch (error:any) {
+      message.error(error.response.data.message || error.message)
+      
+    }
+
+    finally{
+      setLoadingForDelete(false)
+    }
+  }
+
   const columns =[
     {
       title:"Name",
@@ -48,7 +69,7 @@ function CategoriesList() {
     {
       title:"Created At",
       dataIndex:"createdAt",
-      render:(createdAt:string)=>moment(createdAt).format("DD MMM YYYY"),
+      render:(createdAt:string)=>moment(createdAt).format("DD MMM YYYY hh:mm A"),
     },
     {
       title:"Action",
@@ -56,7 +77,13 @@ function CategoriesList() {
       render:(action:any,params:any)=>{
         return(
           <div className="flex gap-3 items-center">
-            <Button type="default" className="btn-small">Delete</Button>
+            <Button type="default" className="btn-small"
+            onClick={()=>[
+              setSelectedCategory(params),
+              onDelete(params._id)
+            ]}
+            loading={loadingForDelete && selectedCategory?._id===params._id}
+            >Delete</Button>
             <Button type="primary" className="btn-small"
             onClick={()=>{
               setSelectedCategory(params)
@@ -89,7 +116,7 @@ function CategoriesList() {
           showCategoryForm={showCategoryForm}
           setShowCategoryForm={setShowCategoryForm}
           selectedCategory={selectedCategory}
-          reloadData={() => {}}
+          reloadData={() => getCategories()}
           setSelectedCategory={setSelectedCategory}
         />
       )}
