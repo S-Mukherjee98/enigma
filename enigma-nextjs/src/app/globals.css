@@ -24,7 +24,7 @@ button {
   font-family: "Poppins", sans-serif;
 }
 
-input {
+input,select {
   width: 100% !important;
   height: 40px !important;
   padding: 0 10px !important;
@@ -45,7 +45,12 @@ textarea{
 }
 
 table{
-  border: 1px solid #a9a9a9 !important;
+  border: 1px solid #bebebe !important;
+  border-radius: 0 !important;
+}
+
+thead th{
+  border-bottom: 1px solid #bebebe !important;
 }
 
 
