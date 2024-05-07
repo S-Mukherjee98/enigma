@@ -4,6 +4,7 @@ import { Tabs } from "antd";
 import { useSelector } from "react-redux";
 import CategoriesList from "./components/CategoriesList";
 import { useRouter,useSearchParams } from "next/navigation";
+import ProductsList from "./components/ProductsList";
 
 function Profile() {
   const { currentUser } = useSelector((state: any) => state.user);
@@ -23,7 +24,7 @@ function Profile() {
           activeKey={selectedtab}
         >
           <Tabs.TabPane tab="Products" key="1">
-            Products
+            <ProductsList/>
           </Tabs.TabPane>
           <Tabs.TabPane tab="Categories" key="2">
             <CategoriesList />
