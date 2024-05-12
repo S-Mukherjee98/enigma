@@ -1,9 +1,9 @@
 import React from "react";
-import { Form, message } from "antd";
+import { Form, message, Upload } from "antd";
 import { getAntdFieldRequiredRules } from "@/helpers/Validations";
 import axios from "axios";
 
-function ProductForm() {
+function ProductForm({ selectedFiles, setSelectedFiles }: ProductFormProps) {
   const [categories, setCategories] = React.useState([]);
   const getCategories = async () => {
     try {
@@ -69,9 +69,27 @@ function ProductForm() {
         >
           <input type="number" />
         </Form.Item>
+
+        <div className="col-span-3">
+          <Upload
+            listType="picture-card"
+            multiple
+            beforeUpload={(file) => {
+              setSelectedFiles((prev: any) => [...prev, file]);
+              return false;
+            }}
+          >
+            Upload
+          </Upload>
+        </div>
       </Form>
     </div>
   );
 }
 
 export default ProductForm;
+
+interface ProductFormProps {
+  selectedFiles: any[];
+  setSelectedFiles: any;
+}
